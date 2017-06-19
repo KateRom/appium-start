@@ -25,6 +25,8 @@ public class MainSearchPositiveTest {
         capabilities.setCapability("appPackage", "com.jayway.contacts");
         capabilities.setCapability("appActivity", "com.jayway.contacts.MainActivity");
 
+        boolean flag = true;
+
         try {
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
@@ -43,5 +45,11 @@ public class MainSearchPositiveTest {
         String exp1 = "Irma Bolden";
         String act1 = driver.findElementById("com.jayway.contacts:id/name").getText();
         Assert.assertEquals(exp1,act1);
+        try {
+            driver.findElementByXPath("//*[@resource-id='com.jayway.contacts:id/name'][2]");
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            flag = false;
+        }
+        Assert.assertFalse(flag);
     }
 }

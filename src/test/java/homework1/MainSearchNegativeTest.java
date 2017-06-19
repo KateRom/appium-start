@@ -2,6 +2,7 @@ package homework1;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import org.junit.Assert;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -36,6 +37,7 @@ public class MainSearchNegativeTest {
         main_search.sendKeys("u1salcd||' '||dmname");
         String exp = "No contacts found with \"u1salcd||' '||dmname\" in the name";
         String act = driver.findElementById("com.jayway.contacts:id/main_text").getText();
+        Assert.assertEquals(exp,act);
 
         try {
             Thread.sleep(5000);
